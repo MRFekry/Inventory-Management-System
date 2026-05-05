@@ -2,11 +2,16 @@
 
 namespace IMS.UseCases.UseCases;
 
-public class ViewInventoriesUseCase
+public interface IViewInventoriesByNameUseCase
+{
+    Task<IEnumerable<Inventory>> ExecuteAsync(string nameFilter = "");
+}
+
+public class ViewInventoriesByNameUseCase : IViewInventoriesByNameUseCase
 {
     private readonly IInventoryRepository _inventoryRepository;
 
-    public ViewInventoriesUseCase(IInventoryRepository inventoryRepository)
+    public ViewInventoriesByNameUseCase(IInventoryRepository inventoryRepository)
     {
         _inventoryRepository = inventoryRepository;
     }

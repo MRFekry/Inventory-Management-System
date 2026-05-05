@@ -13,21 +13,21 @@ public class InventoryRepository : IInventoryRepository
             new Inventory
             {
                 Id = 1,
-                Name = "Inventory 1",
+                Name = "Shirts",
                 Quantity = 10,
                 Price = 100.00m
             },
             new Inventory
             {
                 Id = 2,
-                Name = "Inventory 2",
+                Name = "Pants",
                 Quantity = 20,
                 Price = 200.00m
             },
             new Inventory
             {
                 Id = 3,
-                Name = "Inventory 3",
+                Name = "Jackets",
                 Quantity = 30,
                 Price = 300.00m
             },
