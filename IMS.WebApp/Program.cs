@@ -1,5 +1,6 @@
 using IMS.Plugins.InMemory;
-using IMS.UseCases.UseCases;
+using IMS.UseCases.PluginInterfaces;
+using IMS.UseCases.UseCases.Inventory;
 using IMS.WebApp.Components;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents();
 builder.Services.AddSingleton<IInventoryRepository, InventoryRepository>();
 builder.Services.AddTransient<IViewInventoriesByNameUseCase, ViewInventoriesByNameUseCase>();
+builder.Services.AddTransient<IAddNewInventoryUseCase, AddNewInventoryUseCase>();
 
 var app = builder.Build();
 
