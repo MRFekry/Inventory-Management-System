@@ -1,10 +1,11 @@
 ﻿using IMS.Entities;
+using IMS.UseCases.PluginInterfaces;
 
 namespace IMS.Plugins.InMemory;
 
 public class InventoryRepository : IInventoryRepository
 {
-    private readonly IEnumerable<Inventory> _inventories;
+    private readonly List<Inventory> _inventories;
 
     public InventoryRepository()
     {
@@ -34,7 +35,7 @@ public class InventoryRepository : IInventoryRepository
         };
     }
 
-    public Task<IEnumerable<Inventory>> GetInventoriesByNameAsync(string nameFilter = "")
+    public Task<List<Inventory>> GetInventoriesByNameAsync(string nameFilter = "")
     {
         if (string.IsNullOrWhiteSpace(nameFilter))
             return Task.FromResult(_inventories);
