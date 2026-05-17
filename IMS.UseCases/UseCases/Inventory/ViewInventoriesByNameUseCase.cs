@@ -1,10 +1,10 @@
-﻿using IMS.Entities;
+﻿using IMS.UseCases.PluginInterfaces;
 
-namespace IMS.UseCases.UseCases;
+namespace IMS.UseCases.UseCases.Inventory;
 
 public interface IViewInventoriesByNameUseCase
 {
-    Task<IEnumerable<Inventory>> ExecuteAsync(string nameFilter = "");
+    Task<IEnumerable<Entities.Inventory>> ExecuteAsync(string nameFilter = "");
 }
 
 public class ViewInventoriesByNameUseCase : IViewInventoriesByNameUseCase
@@ -16,7 +16,7 @@ public class ViewInventoriesByNameUseCase : IViewInventoriesByNameUseCase
         _inventoryRepository = inventoryRepository;
     }
 
-    public async Task<IEnumerable<Inventory>> ExecuteAsync(string nameFilter = "")
+    public async Task<IEnumerable<Entities.Inventory>> ExecuteAsync(string nameFilter = "")
     {
         return await _inventoryRepository.GetInventoriesByNameAsync(nameFilter);
     }
