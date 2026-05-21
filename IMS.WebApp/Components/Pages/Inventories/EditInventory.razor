@@ -1,0 +1,70 @@
+﻿@page "/editInventory/{id:int}"
+
+@inject IEditInventoryUseCase EditInventoryUseCase
+@inject IViewInventoryByIdUseCase ViewInventoryByIdUseCase
+@inject NavigationManager NavigationManager
+
+<h3>Edit Inventory</h3>
+
+@if (inventory != null)
+{
+     <EditForm Model="@inventory" FormName="EditInventoryForm" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+
+        <InputNumber type="hidden" @bind-Value="inventory.Id" />
+
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <InputText id="name" class="form-control" @bind-Value="inventory.Name" />
+            <ValidationMessage For="@(() => inventory.Name)" />
+        </div>
+
+        <div class="mb-3">
+            <label for="quantity" class="form-label">Quantity</label>
+            <InputNumber id="quantity" class="form-control" @bind-Value="inventory.Quantity" />
+            <ValidationMessage For="@(() => inventory.Quantity)" />
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <InputNumber id="price" class="form-control" @bind-Value="inventory.Price" />
+            <ValidationMessage For="@(() => inventory.Price)" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a class="btn btn-secondary" href="/inventories">Cancel</a>
+    </EditForm>
+}
+
+
+@code {
+
+    [Parameter]
+    public int id { get; set; }
+
+    [SupplyParameterFromForm]
+    private Inventory? inventory { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        // Fetch the existing inventory details by ID when the component initializes
+        inventory ??= await ViewInventoryByIdUseCase.ExecuteAsync(id);
+
+        if (inventory == null)
+        {
+            // Handle the case where the inventory is not found (e.g., show an error message or navigate back)
+            NavigationManager.NotFound();
+        }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        if (inventory != null)
+        {
+            // Call the use case to edit the inventory
+            await EditInventoryUseCase.ExecuteAsync(inventory);
+            // Optionally, navigate back to the inventory list or show a success message
+            NavigationManager.NavigateTo("/inventories");
+        }
+    }
+}
