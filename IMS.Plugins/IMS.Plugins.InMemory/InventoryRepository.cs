@@ -61,4 +61,25 @@ public class InventoryRepository : IInventoryRepository
         _inventories.Add(inventory);
         return Task.CompletedTask;
     }
+
+    public Task EditInventoryAsync(Inventory updatedInventory)
+    {
+        if (_inventories.Any(i => i.Id != updatedInventory.Id && i.Name.Equals(updatedInventory.Name, StringComparison.OrdinalIgnoreCase)))
+            return Task.CompletedTask; // Another inventory with the same name already exists, do not edit
+
+        var inventory = _inventories.FirstOrDefault(i => i.Id == updatedInventory.Id);
+        if (inventory != null)
+        {
+            // Edit the inventory (implementation for editing inventory goes here)
+            inventory.Name = updatedInventory.Name;
+            inventory.Quantity = updatedInventory.Quantity;
+            inventory.Price = updatedInventory.Price;
+        }
+        return Task.CompletedTask;
+    }
+
+    public Task<Inventory?> GetInventoryByIdAsync(int id)
+    {
+        return Task.FromResult(_inventories.FirstOrDefault(i => i.Id == id));
+    }
 }
