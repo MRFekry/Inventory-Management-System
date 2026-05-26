@@ -1,0 +1,23 @@
+﻿<EditForm Enhance="true" FormName="searchForm" Model="searchFilter" OnValidSubmit="OnSearchFilterChanged">
+    <div class="input-group">
+        <InputText @bind-Value="searchFilter"
+         placeholder="Search ..."
+         class="form-control" />
+        <button type="submit"
+         class="btn btn-primary input-group-text">Search</button>
+    </div>
+</EditForm>
+
+@code {
+
+    [SupplyParameterFromForm]
+    private string? searchFilter { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string?> SearchFilterChanged { get; set; }
+
+    private async Task OnSearchFilterChanged()
+    {
+        await SearchFilterChanged.InvokeAsync(searchFilter);
+    }
+}

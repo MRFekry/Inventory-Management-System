@@ -1,16 +1,11 @@
 ﻿@page "/inventories"
+@using IMS.WebApp.Components.Controls
 
 <h3>Inventory List</h3>
 
-<EditForm FormName="searchInventoryForm" Model="searchInventoryFilter">
-    <div class="input-group">
-        <InputText @bind-Value="searchInventoryFilter"
-         placeholder="Search Inventory by Name"
-         class="form-control" />
-        <button type="submit"
-         class="btn btn-primary input-group-text">Search</button>
-    </div>
-</EditForm>
+<br />
+
+<SearchFilterComponent SearchFilterChanged="HandleSearchFilterChanged"></SearchFilterComponent>
 
 <br />
 
@@ -22,6 +17,10 @@
 
 @code {
 
-    [SupplyParameterFromForm]
-    private string? searchInventoryFilter { get; set; } = string.Empty;
+    private string? searchInventoryFilter;
+
+    private async Task HandleSearchFilterChanged(string? filter)
+    {
+        searchInventoryFilter = filter;
+    }
 }
