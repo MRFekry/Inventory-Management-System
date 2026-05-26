@@ -1,4 +1,9 @@
-﻿<EditForm Enhance="true" FormName="searchForm" Model="searchFilter" OnValidSubmit="OnSearchFilterChanged">
+﻿@if (searchFilter is null)
+{
+    searchFilter = string.Empty;
+}
+
+<EditForm Enhance="true" FormName="searchForm" Model="searchFilter" OnValidSubmit="OnSearchFilterChanged">
     <div class="input-group">
         <InputText @bind-Value="searchFilter"
          placeholder="Search ..."
