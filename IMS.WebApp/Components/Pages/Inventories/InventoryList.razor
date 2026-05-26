@@ -2,8 +2,26 @@
 
 <h3>Inventory List</h3>
 
-<InventoryListComponent SearchInventoryFilter="sh"></InventoryListComponent>
+<EditForm FormName="searchInventoryForm" Model="searchInventoryFilter">
+    <div class="input-group">
+        <InputText @bind-Value="searchInventoryFilter"
+         placeholder="Search Inventory by Name"
+         class="form-control" />
+        <button type="submit"
+         class="btn btn-primary input-group-text">Search</button>
+    </div>
+</EditForm>
+
+<br />
+
+<InventoryListComponent SearchInventoryFilter="@searchInventoryFilter"></InventoryListComponent>
 
 <br />
 
 <a href="./addInventory" class="btn btn-primary" >Add Inventory</a>
+
+@code {
+
+    [SupplyParameterFromForm]
+    private string? searchInventoryFilter { get; set; } = string.Empty;
+}

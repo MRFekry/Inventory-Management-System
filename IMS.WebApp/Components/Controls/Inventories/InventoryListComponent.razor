@@ -30,4 +30,9 @@
     {
         inventories = (await ViewInventoriesByNameUseCase.ExecuteAsync(SearchInventoryFilter ?? string.Empty)).ToList();
     }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        inventories = (await ViewInventoriesByNameUseCase.ExecuteAsync(SearchInventoryFilter ?? string.Empty)).ToList();
+    }
 }
