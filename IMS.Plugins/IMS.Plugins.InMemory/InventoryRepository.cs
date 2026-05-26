@@ -82,4 +82,15 @@ public class InventoryRepository : IInventoryRepository
     {
         return Task.FromResult(_inventories.FirstOrDefault(i => i.Id == id));
     }
+
+    public Task DeleteInventoryAsync(int inventoryId)
+    {
+        if (_inventories.Any(i => i.Id == inventoryId))
+        {
+            var inventoryToRemove = _inventories.First(i => i.Id == inventoryId);
+            _inventories.Remove(inventoryToRemove);
+        }
+        
+        return Task.CompletedTask;
+    }
 }
