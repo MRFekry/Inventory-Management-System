@@ -8,7 +8,12 @@
         <td>@Product.Quantity</td>
         <td>@Product.Price.ToString("C")</td>
         <td>
-            <EditForm FormName="@($"DeleteProductForm-{Product.Id}")" Model="Product" OnValidSubmit="() => DeleteProduct(Product.Id)">
+            <a class="btn btn-primary" href="@($"/products/edit/{Product.Id}")">
+                Edit
+            </a>
+        </td>
+        <td>
+            <EditForm Enhance="true" FormName="@($"DeleteProductForm-{Product.Id}")" Model="Product" OnValidSubmit="() => DeleteProduct(Product.Id)">
                 <button class="btn btn-danger" type="submit">
                     Delete
                 </button>
