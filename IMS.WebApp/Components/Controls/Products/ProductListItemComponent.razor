@@ -1,0 +1,29 @@
+@inject NavigationManager NavigationManager
+@inject IDeleteProductUseCase DeleteProductUseCase
+
+@if (Product != null)
+{
+    <tr>
+        <td>@Product.Name</td>
+        <td>@Product.Quantity</td>
+        <td>@Product.Price.ToString("C")</td>
+        <td>
+            <EditForm FormName="@($"DeleteProductForm-{Product.Id}")" Model="Product" OnValidSubmit="() => DeleteProduct(Product.Id)">
+                <button class="btn btn-danger" type="submit">
+                    Delete
+                </button>
+            </EditForm>
+        </td>
+    </tr>
+}
+
+@code {
+    [Parameter]
+    public Product? Product { get; set; }
+
+    private void DeleteProduct(int productId)
+    {
+        DeleteProductUseCase.ExecuteAsync(productId);
+        NavigationManager.Refresh();
+    }
+}
