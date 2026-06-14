@@ -12,15 +12,9 @@
             </a>
         </td>
         <td>
-            <!-- ToDo: replace the below static SSR form with interactive SSR deletion functionality --!>
-            <EditForm 
-                Enhance="true" 
-                FormName="@($"DeleteProductForm-{Product.Id}")" 
-                Model="Product" >
-                <button class="btn btn-danger" type="button" @onclick="async () => { await DeleteProduct(Product.Id); }">
-                    Delete
-                </button>
-            </EditForm>
+            <button type="button" class="btn btn-danger" @onclick="async () => { await DeleteProduct(Product.Id); }">
+                Delete
+            </button>
         </td>
     </tr>
 }
