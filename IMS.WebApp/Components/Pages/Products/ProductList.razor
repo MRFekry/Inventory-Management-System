@@ -1,11 +1,12 @@
 @page "/products"
+@rendermode InteractiveServer
 @using IMS.WebApp.Components.Controls
 
 <h3>Product List</h3>
 
 <br />
 
-<SearchFilterComponent SearchFilterChanged="HandleSearchFilterChanged"></SearchFilterComponent>
+<InteractiveSearchFilterComponent SearchFilterChanged="HandleSearchFilterChanged"></InteractiveSearchFilterComponent>
 
 <br />
 

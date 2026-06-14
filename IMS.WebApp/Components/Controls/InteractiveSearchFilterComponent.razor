@@ -1,0 +1,20 @@
+﻿<div class="input-group">
+    <input
+        @bind-value="searchFilter"
+        @bind-value:event="oninput"
+        placeholder="Search ..."
+        @onkeyup="OnSearchFilterChanged"
+        class="form-control" />
+</div>
+
+@code {
+    private string searchFilter {get; set;} = string.Empty;
+
+    [Parameter]
+    public EventCallback<string?> SearchFilterChanged { get; set; }
+
+    private async Task OnSearchFilterChanged()
+    {
+        await SearchFilterChanged.InvokeAsync(searchFilter);
+    }
+}
