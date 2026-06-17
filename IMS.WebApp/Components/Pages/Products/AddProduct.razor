@@ -1,0 +1,32 @@
+﻿@page "/addProduct"
+@rendermode InteractiveServer
+<h3>AddProduct</h3>
+
+<br />
+
+<div class="form-group">
+    <label for="name" class="form-label">Product Name</label>
+    <input id="name" class="form-control" @bind-value="product.Name" />
+</div>
+
+<div class="form-group">
+    <label for="quantity" class="form-label">Quantity</label>
+    <input id="quantity" class="form-control" @bind-value="product.Quantity" />
+</div>
+
+<div class="form-group">
+    <label for="price" class="form-label">Price</label>
+    <input id="price" class="form-control" @bind-value="product.Price" />
+</div>
+
+<div class="form-group">
+    <label for="price" class="form-label">Inventories</label>
+    <SearchProductInventoriesComponent></SearchProductInventoriesComponent>
+</div>
+
+
+
+
+@code {
+    private Product product { get; set; } = new Product();
+}
