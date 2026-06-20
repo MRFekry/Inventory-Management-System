@@ -11,9 +11,9 @@ public class ProductRepository : IProductRepository
     {
         _products = new List<Product>
         {
-            new Product { Id = 1, Name = "T-Shirt", Quantity = 50, Price = 19.99m },
-            new Product { Id = 2, Name = "Jeans", Quantity = 30, Price = 49.99m },
-            new Product { Id = 3, Name = "Sneakers", Quantity = 20, Price = 89.99m },
+            new Product { Id = 1, Name = "Bike", Quantity = 50, Price = 300m },
+            new Product { Id = 2, Name = "E-Bike", Quantity = 30, Price = 2500m },
+            new Product { Id = 3, Name = "Cargo Bike", Quantity = 5, Price = 4500m },
         };
     }
 

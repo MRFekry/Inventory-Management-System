@@ -14,23 +14,51 @@ public class InventoryRepository : IInventoryRepository
             new Inventory
             {
                 Id = 1,
-                Name = "Shirts",
-                Quantity = 10,
-                Price = 100.00m
+                Name = "wheel",
+                Quantity = 70,
+                Price = 15.00m
             },
             new Inventory
             {
                 Id = 2,
-                Name = "Pants",
-                Quantity = 20,
-                Price = 200.00m
+                Name = "seat",
+                Quantity = 50,
+                Price = 20.00m
             },
             new Inventory
             {
                 Id = 3,
-                Name = "Jackets",
+                Name = "pedal",
+                Quantity = 200,
+                Price = 10.00m
+            },
+            new Inventory
+            {
+                Id = 4,
+                Name = "lamp",
                 Quantity = 30,
-                Price = 300.00m
+                Price = 20.00m
+            },
+            new Inventory
+            {
+                Id = 5,
+                Name = "display",
+                Quantity = 20,
+                Price = 100.00m
+            },
+            new Inventory
+            {
+                Id = 6,
+                Name = "battery",
+                Quantity = 5,
+                Price = 500.00m
+            },
+            new Inventory
+            {
+                Id = 7,
+                Name = "Cargo box",
+                Quantity = 3,
+                Price = 700.00m
             },
         };
     }
@@ -90,7 +118,7 @@ public class InventoryRepository : IInventoryRepository
             var inventoryToRemove = _inventories.First(i => i.Id == inventoryId);
             _inventories.Remove(inventoryToRemove);
         }
-        
+
         return Task.CompletedTask;
     }
 }
