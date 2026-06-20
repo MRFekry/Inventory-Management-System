@@ -15,7 +15,7 @@ A robust, enterprise-grade **Inventory Management System** built using modern **
 The application leverages a strict **Clean Architecture / Domain-Driven Design (DDD)** breakdown to ensure high testability, maintenance isolation, and scalability:
 
 ```text
-├── 📂 IMS.CoreBusiness       # Pure Domain Model Layer (Products, Inventories)
+├── 📂 IMS.Entities          # Pure Domain Model Layer (Products, Inventories)
 ├── 📂 IMS.UseCases          # Orchestration Layer (Application Logic, Interactors)
 ├── 📂 IMS.Plugins           # Data Drivers & Adapters (EF Core, SQL Server Infrastructure)
 └── 📂 IMS.WebApp            # Presentation Layer (Blazor Web UI Architecture)
