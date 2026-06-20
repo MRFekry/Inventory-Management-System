@@ -1,11 +1,8 @@
 ﻿@inject IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase
 
 <div class="input-group">
-    <input 
-        @bind-value="SearchFilter" 
-        @bind-value:event="oninput"
-        placeholder="Search inventories ..."
-        class="form-control" />
+    <input @bind-value="SearchFilter" @bind-value:event="oninput" @onfocus="FilterInventoriesChanged"
+           @onblur="FocusChanged" placeholder="Search inventories ..." class="form-control" />
 </div>
 
 @if (inventories is not null && inventories.Count > 0)
@@ -14,7 +11,7 @@
         <ul>
             @foreach (var inventory in inventories)
             {
-                <li @key="inventory.Id">
+                <li @key="inventory.Id" @onclick="() => HandleSelectInventory(inventory)">
                     @inventory.Name
                 </li>
             }
@@ -24,16 +21,19 @@
 
 @code {
 
-    private string searchFilter;
-    private string SearchFilter 
-    { 
+    [Parameter]
+    public EventCallback<Inventory> OnInventorySelected { get; set; }
+
+    private string searchFilter = string.Empty;
+    private string SearchFilter
+    {
         get => searchFilter;
         set
         {
             if (searchFilter != value)
             {
                 searchFilter = value;
-                FilterInventoriesChanged();
+                _ = InvokeAsync(FilterInventoriesChanged);
             }
         }
     }
@@ -41,10 +41,25 @@
 
     private async Task FilterInventoriesChanged()
     {
-        inventories = 
+        inventories =
             (await ViewInventoriesByNameUseCase.ExecuteAsync(searchFilter))
             .ToList();
-        
+
+        StateHasChanged();
+    }
+
+    private async Task HandleSelectInventory(Inventory inventory)
+    {
+        await OnInventorySelected.InvokeAsync(inventory);
+        inventories.Clear();
+        searchFilter = string.Empty;
+        StateHasChanged();
+    }
+
+    private async Task FocusChanged()
+    {
+        await Task.Delay(200);
+        inventories.Clear();
         StateHasChanged();
     }
 }
