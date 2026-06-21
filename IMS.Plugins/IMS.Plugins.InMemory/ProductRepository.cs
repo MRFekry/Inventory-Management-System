@@ -52,13 +52,53 @@ public class ProductRepository : IProductRepository
             product.Name = updatedProduct.Name;
             product.Quantity = updatedProduct.Quantity;
             product.Price = updatedProduct.Price;
+            product.ProductInventories = updatedProduct.ProductInventories;
         }
+
         return Task.CompletedTask;
     }
 
     public Task<Product?> GetProductByIdAsync(int id)
     {
-        return Task.FromResult(_products.FirstOrDefault(p => p.Id == id));
+        var product = _products.FirstOrDefault(p => p.Id == id);
+        Product? newProd = null;
+
+        if (product is not null)
+        {
+            newProd = new Product();
+            newProd.Id = product.Id;
+            newProd.Name = product.Name;
+            newProd.Quantity = product.Quantity;
+            newProd.Price = product.Price;
+
+            if (product.ProductInventories is not null && product.ProductInventories.Count > 0)
+            {
+                newProd.ProductInventories = new List<ProductInventory>(product.ProductInventories.Capacity);
+                foreach (var pinv in product.ProductInventories)
+                {
+                    var productInventory = new ProductInventory
+                    {
+                        InventoryId = pinv.InventoryId,
+                        ProductId = pinv.ProductId,
+                        Product = product,
+                        Inventory = new Inventory(),
+                        InventoryQuantity = pinv.InventoryQuantity
+                    };
+
+                    if (pinv.Inventory is not null)
+                    {
+                        productInventory.Inventory.Id = pinv.Inventory.Id;
+                        productInventory.Inventory.Name = pinv.Inventory.Name;
+                        productInventory.Inventory.Quantity = pinv.Inventory.Quantity;
+                        productInventory.Inventory.Price = pinv.Inventory.Price;
+                    }
+
+                    newProd.ProductInventories.Add(productInventory);
+                }
+            }
+        }
+
+        return Task.FromResult(newProd)!;
     }
 
     public Task DeleteProductAsync(int productId)
