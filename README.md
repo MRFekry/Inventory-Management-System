@@ -1,22 +1,21 @@
-﻿# Project Name
-Inventory Management System
+# 📦 Inventory Management System (IMS)
 
-## Description
-A system to manage inventories activities like showing and filtering inventories and products, do purchases and selling, etc. using C# 14, .Net 10, Blazor, SQL Server, CLEAN "Onion" architecture, and more ...
+[![Framework](https://img.shields.io/badge/.NET-10.0-blueviolet?style=flat-square&logo=dotnet)](https://dotnet.microsoft.com/)
+[![UI Architecture](https://img.shields.io/badge/Blazor-Static%20%26%20Interactive%20SSR-blue?style=flat-square&logo=blazor)](https://learn.microsoft.com/en-us/aspnet/core/blazor/)
+[![Design Pattern](https://img.shields.io/badge/Architecture-Clean%20%2F%20DDD-success?style=flat-square)]()
 
-## Getting Started
+A robust, enterprise-grade **Inventory Management System** built using modern **C#** and **Blazor (.NET 10)**. This project follows clean engineering principles, decoupling core business logic from UI frameworks and data persistence mechanics.
 
-### Prerequisites
-- .NET 10 SDK or later
+*Developed as part of advanced professional training in modern Blazor architectural design patterns.*
 
-### Installation
-1. Clone the repository
-2. Navigate to the project directory
-3. Run dotnet restore
-4. Run dotnet run
+---
 
-## Usage
-Describe how to use your application.
+## 🏗️ Architectural Blueprint
 
-## License
-Add your license information here.
+The application leverages a strict **Clean Architecture / Domain-Driven Design (DDD)** breakdown to ensure high testability, maintenance isolation, and scalability:
+
+```text
+├── 📂 IMS.Entities          # Pure Domain Model Layer (Products, Inventories)
+├── 📂 IMS.UseCases          # Orchestration Layer (Application Logic, Interactors)
+├── 📂 IMS.Plugins           # Data Drivers & Adapters (EF Core, SQL Server Infrastructure)
+└── 📂 IMS.WebApp            # Presentation Layer (Blazor Web UI Architecture)
